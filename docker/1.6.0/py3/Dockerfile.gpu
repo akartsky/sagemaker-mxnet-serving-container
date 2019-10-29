@@ -39,7 +39,7 @@ WORKDIR /
 
 COPY sagemaker_mxnet_serving_container.tar.gz /sagemaker_mxnet_serving_container.tar.gz
 
-RUN ${PIP} install --no-cache-dir mxnet-cu100mkl==$MX_VERSION \
+RUN ${PIP} install --no-cache-dir mxnet-cu100mkl==1.6.0b20191013 \
                                   mxnet-model-server==$MMS_VERSION \
                                   keras-mxnet==2.2.4.1 \
                                   numpy==1.14.5 \
