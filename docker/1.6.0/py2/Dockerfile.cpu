@@ -31,7 +31,7 @@ RUN wget https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSIO
     make && make install && rm -rf ../Python-$PYTHON_VERSION* && \
     ln -s /usr/local/bin/pip3 /usr/bin/pip
 
-RUN ln -s $(which ${PYTHON}) /usr/local/bin/python
+# RUN ln -s $(which ${PYTHON}) /usr/local/bin/python
 
 RUN ${PIP} --no-cache-dir install --upgrade pip setuptools
 
