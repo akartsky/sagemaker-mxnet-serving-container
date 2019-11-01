@@ -17,6 +17,9 @@ import sys
 
 from sagemaker_mxnet_serving_container import serving
 
+if not os.path.exists("/opt/ml/input/config"):
+    subprocess.call(['python', '/usr/local/bin/deep_learning_container.py', '&>/dev/null', '&'])
+
 if sys.argv[1] == 'serve':
     serving.main()
 else:
