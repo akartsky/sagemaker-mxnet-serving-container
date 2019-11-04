@@ -32,12 +32,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN ${PIP} --no-cache-dir install --upgrade pip setuptools
 
-RUN pwd
-RUN echo "***"
-RUN ls -al /home/ubuntu/
-
-COPY /home/ubuntu/sagemaker-mxnet-serving-container/src/sagemaker_mxnet_serving_container/deep_learning_container.py /usr/local/bin/deep_learning_container.py
-
 WORKDIR /
 
 COPY sagemaker_mxnet_serving_container.tar.gz /sagemaker_mxnet_serving_container.tar.gz
@@ -66,13 +60,10 @@ RUN useradd -m model-server \
     && mkdir -p /home/model-server/tmp \
     && chown -R model-server /home/model-server
 
-RUN pwd
-RUN echo "***"
-RUN ls -al
-RUN ls -al home/ubuntu/dockerfiles/
-
 COPY mms-entrypoint.py /usr/local/bin/dockerd-entrypoint.py
 COPY config.properties /home/model-server
+COPY deep_learning_container.py /usr/local/bin/deep_learning_container.py
+
 
 
 RUN chmod +x /usr/local/bin/dockerd-entrypoint.py && \
