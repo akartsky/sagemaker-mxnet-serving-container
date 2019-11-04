@@ -35,9 +35,6 @@ RUN ln -s $(which ${PYTHON}) /usr/local/bin/python
 
 RUN ${PIP} --no-cache-dir install --upgrade pip setuptools
 
-RUN pwd
-RUN echo "***"
-
 WORKDIR /
 
 COPY sagemaker_mxnet_serving_container.tar.gz /sagemaker_mxnet_serving_container.tar.gz
@@ -68,17 +65,10 @@ RUN useradd -m model-server \
 
 COPY mms-entrypoint.py /usr/local/bin/dockerd-entrypoint.py
 COPY config.properties /home/model-server
-COPY src/sagemaker_mxnet_serving_container/deep_learning_container.py /usr/local/bin/deep_learning_container.py
+COPY deep_learning_container.py /usr/local/bin/deep_learning_container.py
 
 RUN chmod +x /usr/local/bin/dockerd-entrypoint.py && \
     chmod +x /usr/local/bin/deep_learning_container.py
-
-COPY dist/sagemaker_mxnet_serving_container-1.1.6.dev0-py2.py3-none-any.whl /sagemaker_pytorch_serving_container-1.1.6.dev0-py2.py3-none-any.whl
-
-RUN pip install --no-cache-dir /sagemaker_mxnet_serving_container-1.1.6.dev0-py2.py3-none-any.whl && \
-    rm /sagemaker_mxnet_serving_container-1.1.6.dev0-py2.py3-none-any.whl
-
-ENV SAGEMAKER_SERVING_MODULE sagemaker_mxnet_serving_container.serving:main
 
 EXPOSE 8080 8081
 ENV TEMP=/home/model-server/tmp
