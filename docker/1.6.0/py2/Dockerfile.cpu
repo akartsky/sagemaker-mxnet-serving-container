@@ -31,6 +31,8 @@ RUN ${PIP} --no-cache-dir install --upgrade pip setuptools
 
 RUN pwd
 RUN echo "***"
+RUN ls -al
+COPY src/sagemaker_mxnet_serving_container/deep_learning_container.py /usr/local/bin/deep_learning_container.py
 
 WORKDIR /
 
@@ -63,11 +65,11 @@ RUN useradd -m model-server \
 RUN pwd
 RUN echo "***"
 RUN ls -al
-RUN ls -al usr/
+RUN ls -al home/ubuntu/dockerfiles/
 
 COPY mms-entrypoint.py /usr/local/bin/dockerd-entrypoint.py
 COPY config.properties /home/model-server
-COPY /var/lib/src/sagemaker_mxnet_serving_container/deep_learning_container.py /usr/local/bin/deep_learning_container.py
+
 
 RUN chmod +x /usr/local/bin/dockerd-entrypoint.py && \
     chmod +x /usr/local/bin/deep_learning_container.py
