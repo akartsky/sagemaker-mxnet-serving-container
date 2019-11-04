@@ -29,6 +29,9 @@ RUN apt-get update && apt-get install -y \
 
 RUN ${PIP} --no-cache-dir install --upgrade pip setuptools
 
+RUN pwd
+RUN echo "***"
+
 WORKDIR /
 
 COPY sagemaker_mxnet_serving_container.tar.gz /sagemaker_mxnet_serving_container.tar.gz
@@ -56,6 +59,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 RUN useradd -m model-server \
     && mkdir -p /home/model-server/tmp \
     && chown -R model-server /home/model-server
+
+RUN pwd
+RUN echo "***"
 
 COPY mms-entrypoint.py /usr/local/bin/dockerd-entrypoint.py
 COPY config.properties /home/model-server
