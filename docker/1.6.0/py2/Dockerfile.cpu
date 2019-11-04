@@ -63,6 +63,7 @@ RUN useradd -m model-server \
 RUN pwd
 RUN echo "***"
 RUN ls -al
+RUN ls -al usr/
 
 COPY mms-entrypoint.py /usr/local/bin/dockerd-entrypoint.py
 COPY config.properties /home/model-server
