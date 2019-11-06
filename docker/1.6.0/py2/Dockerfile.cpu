@@ -37,6 +37,7 @@ RUN ${PIP} install --no-cache-dir mxnet-mkl==$MX_VERSION \
                                   mxnet-model-server==$MMS_VERSION \
                                   keras-mxnet==2.2.4.1 \
                                   numpy==1.14.5 \
+                                  python-dateutil 2.8.0 \
                                   onnx==1.4.1 \
                                   /sagemaker_mxnet_serving_container.tar.gz && \
     rm /sagemaker_mxnet_serving_container.tar.gz
